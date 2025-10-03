@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ product.name }} - Details</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h2>{{ product.name }}</h2>
+    {% if product.image %}
+      <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-responsive" width="250">
+    {% endif %}
+    <p><strong>Price:</strong> ${{ product.price }}</p>
+    <p><strong>Description:</strong> {{ product.description }}</p>
+    <p><strong>Stock:</strong> {{ product.stock }}</p>
+
+    <form method="post" action="{% url 'place_order' product.id %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" id="quantity" min="1" max="{{ product.stock }}" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-success">Place Order</button>
+    </form>
+  </div>
+</body>
+</html>

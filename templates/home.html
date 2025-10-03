@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>e-kart</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}" />
+</head>
+<body id="home_page">
+  <nav id="main_nav">
+    <div id="nav_logo">Online kart</div>
+    <form id="nav_search_form" action="/search">
+      <input id="nav_search_input" type="text" name="q" placeholder="Search" />
+      <button id="nav_search_btn" type="submit">Go</button>
+    </form>
+    <ul id="nav_links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+      <li id="nav_dropdown">
+        <a href="#">Help ▾</a>
+        <div id="dropdown_menu">
+          <a href="#">support</a>
+        </div>
+      </li>
+    </ul>
+    {% if request.user.is_staff %}
+      <form action="{% url 'add_product' %}" method="get">            
+        <button type="submit" id="add_btn">Add Product</button>
+      </form>
+    {% endif %}
+  </nav>
+
+  <div class="container-fluid" id="list_1">
+
+    {% if fashion_rows %}
+      <h2 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Fashion</h2>
+      {% for row in fashion_rows %}
+        <div class="row product-row justify-content-start">
+          {% for product in row %}
+            <div class="col-md-2 col-sm-4 col-6 product-box">
+              <div class="product-card">
+                {% if product.image %}
+                  <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid product-image">
+                  </a>
+                {% endif %}
+                <h3 class="product-name">{{ product.name }}</h3>
+                
+                <p class="product-price">$ {{ product.price }}</p>
+                <p class="product-desc">{{ product.description }}</p>
+                <p class="product-stock">Stock: {{ product.stock }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% endif %}
+  
+    {% if electronics_rows %}
+      <h2 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Electronics</h2>
+      {% for row in electronics_rows %}
+        <div class="row product-row justify-content-start">
+          {% for product in row %}
+            <div class="col-md-2 col-sm-4 col-6 product-box">
+              <div class="product-card">
+                {% if product.image %}
+                  <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid product-image">
+                  </a>
+                {% endif %}
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-category"><strong>Category:</strong> {{ product.get_category_display }}</p>
+                <p class="product-price">$ {{ product.price }}</p>
+                <p class="product-desc">{{ product.description }}</p>
+                <p class="product-stock">Stock: {{ product.stock }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% endif %}
+  
+    {% if home_rows %}
+      <h2 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Home & Furniture</h2>
+      {% for row in home_rows %}
+        <div class="row product-row justify-content-start">
+          {% for product in row %}
+            <div class="col-md-2 col-sm-4 col-6 product-box">
+              <div class="product-card">
+                {% if product.image %}
+                  <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid product-image">
+                  </a>
+                {% endif %}
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-category"><strong>Category:</strong> {{ product.get_category_display }}</p>
+                <p class="product-price">$ {{ product.price }}</p>
+                <p class="product-desc">{{ product.description }}</p>
+                <p class="product-stock">Stock: {{ product.stock }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% endif %}
+  
+    {% if others_rows %}
+      <h2 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Others</h2>
+      {% for row in others_rows %}
+        <div class="row product-row justify-content-start">
+          {% for product in row %}
+            <div class="col-md-2 col-sm-4 col-6 product-box">
+              <div class="product-card">
+                {% if product.image %}
+                  <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid product-image">
+                  </a>
+                {% endif %}
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-category"><strong>Category:</strong> {{ product.get_category_display }}</p>
+                <p class="product-price">$ {{ product.price }}</p>
+                <p class="product-desc">{{ product.description }}</p>
+                <p class="product-stock">Stock: {{ product.stock }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% endif %}
+  
+  </div>
+  
+</body>
+<footer class="site-footer">
+  <div class="container-fluid">
+    <div class="row footer-main">
+      <div class="col-sm-2 footer-block">
+        <h4>ABOUT</h4>
+        <ul class="list-unstyled">
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Flipkart Stories</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Flipkart Wholesale</a></li>
+          <li><a href="#">Corporate Information</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 footer-block">
+        <h4>HELP</h4>
+        <ul class="list-unstyled">
+          <li><a href="#">Payments</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Cancellation &amp; Returns</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Report Infringement</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 footer-block">
+        <h4>POLICY</h4>
+        <ul class="list-unstyled">
+          <li><a href="#">Return Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Sitemap</a></li>
+          <li><a href="#">EPR Compliance</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 footer-block">
+        <h4>SOCIAL</h4>
+        <ul class="list-unstyled">
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-4 footer-block">
+        <h4>Mail Us:</h4>
+        <address>
+          Flipkart Internet Private Limited,<br>
+          Buildings Alyssa, Begonia &amp; Clove Embassy Tech Village,<br>
+          Outer Ring Road, Devarabeesanahalli Village,<br>
+          Bengaluru 560103, Karnataka, India
+        </address>
+        <h4>Registered Office Address:</h4>
+        <address>
+          CIN:U51109KA2012PTC066107<br>
+          Telephone: <a href="tel:044-45614700">044‑45614700</a>
+        </address>
+      </div>
+    </div>
+    <hr style="border-color:#878787">
+    <div class="footer-bottom row">
+      <div class="col-sm-2"><a href="#"><strong>Become a Seller</strong></a></div>
+      <div class="col-sm-2"><a href="#"><strong>Advertise</strong></a></div>
+      <div class="col-sm-2"><a href="#"><strong>Gift Cards</strong></a></div>
+      <div class="col-sm-2"><a href="#"><strong>Help Centre</strong></a></div>
+      <div class="col-sm-4 text-right">
+        &copy; 2007‑{{ current_year }} flipkart.com
+      </div>
+    </div>
+  </div>
+</footer>
+
+</html>

@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>Sign In</title>
     {% load static %}
-    <link rel="stylesheet" href="{ % static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
 </head>
-<body>
+<body id="signin_body">
+
+    
     <div>
         {% if messages %}
             <ul class="messages">
-                 {% for message in messages %}       <!-- here the for loop is used so  that we can pass the diff like {{message}}  -->
+                 {% for message in messages %}      
                     <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>  
                         {{ message }}
                     </li>
@@ -20,22 +22,28 @@
             </ul>
         {% endif %}
     </div>
-    <div>
-        <form action="/signin/" class="" method="post" autocomplete="off">
+
+    
+    <div class="container" id="signin_page">
+        <form action="/signin/" method="post" autocomplete="off">
             {% csrf_token %}
-            <div>
-                <label for="">Name</label>
-                <input type="text" class="" name="username">
+            <div class="form-group">
+                <label id="signin_page_label">Name</label>
+                <input type="text" class="form-control" id="signin_page_input" name="username">
             </div>
-            <div>
-                <label for="">Password</label>
-                <input type="text" class="" name="password">
+
+            <div class="form-group">
+                <label id="signin_page_label">Password</label>
+                <input type="password" class="form-control" id="signin_page_input" name="password">
             </div>
-            <div>
-                <input type="submit" name="" value="signin" id="">
-                <input type="reset" name="" value="clear" id="">
+
+            <div class="form-group text-center">
+                <input type="submit" class="btn btn-primary" id="signin_page_btn" value="Sign In">
+                <input type="reset" class="btn btn-primary" id="signin_page_btn" value="Clear">
+                <a href="{% url 'login' %}" class="btn btn-success" id="signin_page_btn">Back to Login</a>
             </div>
         </form>
     </div>
+
 </body>
 </html>

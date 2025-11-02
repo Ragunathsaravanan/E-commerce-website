@@ -337,3 +337,75 @@ ul.messages {
   }
   footer hr { margin: 20px 0; border-color: #454d5e !important; }
   
+/* ---------- SIGNIN PAGE STYLING (same as login) ---------- */
+
+#signin_body {
+  margin: 10%;
+  padding: 20%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  background: url("/static/images/ferrarii.jpeg") no-repeat center center;
+  background-size: cover;
+}
+
+#signin_page.container {
+  padding-top: 2%;
+  margin-top: 10%;
+}
+
+#signin_page {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px #0002;
+  max-width: 400px;
+  width: 100%;
+}
+
+#signin_page_label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+#signin_page_input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+#signin_page_input:focus {
+  border-color: #667eea;
+}
+
+#signin_page_btn {
+  width: 100%;
+  padding: 8px;
+  font-size: 13px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 5px;
+  background: #667eea;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#signin_page_btn:hover {
+  background: #5a67d8;
+}
+
+#signin_page form > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
